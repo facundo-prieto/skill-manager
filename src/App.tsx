@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { RepoPicker } from "@/components/RepoPicker";
 import { ActivityPanel } from "@/components/ActivityPanel";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { JobsProvider } from "@/lib/jobs";
 import { LaunchSummary } from "@/components/LaunchSummary";
 import { AgentsView } from "@/views/AgentsView";
@@ -86,6 +87,7 @@ export function App() {
                 <>
                   <LaunchSummary skills={skills} off={off} project={project} />
                   <ActivityPanel />
+                  <ThemeToggle />
                 </>
               }
               skills={skills}

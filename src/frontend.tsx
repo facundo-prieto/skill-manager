@@ -1,11 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { applyTheme } from "./lib/theme";
 
-// follow the OS theme (shadcn's dark variant keys off a .dark class)
-const dark = matchMedia("(prefers-color-scheme: dark)");
-const applyTheme = () => document.documentElement.classList.toggle("dark", dark.matches);
-dark.addEventListener("change", applyTheme);
 applyTheme();
 
 const app = (
