@@ -1,0 +1,100 @@
+@import "../styles/globals.css";
+
+@theme inline {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --color-dock: var(--dock);
+  --color-dock-foreground: var(--dock-foreground);
+  --color-dock-muted: var(--dock-muted);
+}
+
+/* Cool paper + ink, cobalt only for "on/selected", red only for destructive */
+:root {
+  --radius: 0.5rem;
+  --background: #f5f6f8;
+  --foreground: #18202b;
+  --card: #ffffff;
+  --card-foreground: #18202b;
+  --popover: #ffffff;
+  --popover-foreground: #18202b;
+  --primary: #2f5bea;
+  --primary-foreground: #ffffff;
+  --secondary: #eceef2;
+  --secondary-foreground: #18202b;
+  --muted: #eceef2;
+  --muted-foreground: #667085;
+  --accent: #e9eefc;
+  --accent-foreground: #1d3fae;
+  --destructive: #c2412d;
+  --border: #e2e5ea;
+  --input: #d5d9e0;
+  --ring: #2f5bea;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #18202b;
+  --sidebar-primary: #2f5bea;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e9eefc;
+  --sidebar-accent-foreground: #1d3fae;
+  --sidebar-border: #e2e5ea;
+  --sidebar-ring: #2f5bea;
+  --dock: #18202b;
+  --dock-foreground: #f1f3f6;
+  --dock-muted: #9aa4b2;
+}
+
+.dark {
+  --background: #13171d;
+  --foreground: #e6e9ee;
+  --card: #1a1f27;
+  --card-foreground: #e6e9ee;
+  --popover: #1f2530;
+  --popover-foreground: #e6e9ee;
+  --primary: #6d8ff5;
+  --primary-foreground: #0d1220;
+  --secondary: #252c37;
+  --secondary-foreground: #e6e9ee;
+  --muted: #252c37;
+  --muted-foreground: #95a0b0;
+  --accent: #222c45;
+  --accent-foreground: #b9c8fb;
+  --destructive: #e0644f;
+  --border: #2a313c;
+  --input: #343c49;
+  --ring: #6d8ff5;
+  --sidebar: #171b22;
+  --sidebar-foreground: #e6e9ee;
+  --sidebar-primary: #6d8ff5;
+  --sidebar-primary-foreground: #0d1220;
+  --sidebar-accent: #222c45;
+  --sidebar-accent-foreground: #b9c8fb;
+  --sidebar-border: #2a313c;
+  --sidebar-ring: #6d8ff5;
+  --dock: #0d1015;
+  --dock-foreground: #e6e9ee;
+  --dock-muted: #8792a2;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Quiet scrollbars: thin, in the app's palette, only visible while hovering the scrolling area */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+*:hover {
+  scrollbar-color: color-mix(in oklab, var(--muted-foreground) 40%, transparent) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
