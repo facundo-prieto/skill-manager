@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { ChevronRight, Search, ShieldCheck } from "lucide-react";
+import { ChevronRight, ChevronsDownUp, ChevronsUpDown, Search, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -36,6 +36,10 @@ export function SessionView({ skills, off, setOff, usage, project, onOpen }: { s
     setOff(next);
   };
   const on = skills.filter(isOn);
+  const allGroups = [...new Set(skills.map(groupOf))];
+  const allFolded = allGroups.every((g) => folded.has(g));
+  // "Only this": the group stays on, every other skill and plugin goes off
+  const only = (keys: string[]) => setOff(new Set(skills.map(keyOf).filter((k) => !keys.includes(k))));
 
   const groups = useMemo(() => {
     const q = query.toLowerCase();
@@ -103,6 +107,10 @@ export function SessionView({ skills, off, setOff, usage, project, onOpen }: { s
           <ToggleGroupItem value="off">Off</ToggleGroupItem>
           <ToggleGroupItem value="unused">Never used</ToggleGroupItem>
         </ToggleGroup>
+        <Button variant="outline" onClick={() => setFolded(allFolded ? new Set() : new Set(allGroups))}>
+          {allFolded ? <ChevronsUpDown data-icon="inline-start" /> : <ChevronsDownUp data-icon="inline-start" />}
+          {allFolded ? "Expand all" : "Collapse all"}
+        </Button>
       </div>
 
       {groups.length === 0 ? (
@@ -130,6 +138,9 @@ export function SessionView({ skills, off, setOff, usage, project, onOpen }: { s
                       {list.filter(isOn).length}/{list.length} on
                     </span>
                   </button>
+                  <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => only(skills.filter((s) => groupOf(s) === group).map(keyOf))} title={`Turn everything else off and keep only ${group}`}>
+                    Only this
+                  </Button>
                   <span className="text-xs text-muted-foreground tabular">~{fmtTokens(sum(list.filter(isOn), "listingTokens"))} tok</span>
                 </div>
                 {open && (
